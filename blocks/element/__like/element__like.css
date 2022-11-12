@@ -4,7 +4,6 @@
   height: 19px;
   transition: opacity, 0.3s;
   cursor: pointer;
-  transition: opacity 0.3s;
 }
 
 .element__like:hover {
