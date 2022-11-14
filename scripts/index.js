@@ -1,32 +1,35 @@
-let editButton = document.querySelector('.profile__edit_open');
-let closeButton = document.querySelector('.profile__edit_close');
-let popup = document.querySelector('.popup');
+let popupElement = document.querySelector('.popup');
 
-editButton.addEventListener('click', function() {
-  popup.classList.add('popup_opened');
-});
+let editButton = document.querySelector('.profile__edit');
+let saveButton = popupElement.querySelector('.popup__save');
+let closeButton = popupElement.querySelector('.popup__close');
 
-closeButton.addEventListener('click', function() {
-  popup.classList.remove('popup_opened');
-  nameInput.value = profileName.textContent;
-  descriptionInput.value = profileDescription.textContent;
-});
+let formElement = popupElement.querySelector('.popup__form');
+let nameInput = formElement.querySelector('.popup__input_type_name');
+let jobInput = formElement.querySelector('.popup__input_type_description');
 
-
-let popupElement = document.querySelector('.popup__container');
-let nameInput = document.querySelector('.popup__input_name');
-let descriptionInput = document.querySelector('.popup__input_description');
 let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
-nameInput.value = profileName.textContent;
-descriptionInput.value = profileDescription.textContent;
 
-function formSubmitHandler (evt) {
-	evt.preventDefault();
-  profileName.textContent = `${nameInput.value}`;
-  profileDescription.textContent = `${descriptionInput.value}`;
-  popup.classList.remove('popup_opened');
+function editProfile() {
+  popupElement.classList.add('popup_opened');
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileDescription.textContent;
 };
 
-popupElement.addEventListener('submit', formSubmitHandler);
+editButton.addEventListener('click', editProfile);
 
+function closePopup() {
+  popupElement.classList.remove('popup_opened');
+};
+
+closeButton.addEventListener('click', closePopup);
+
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  profileName.textContent = `${nameInput.value}`;
+  profileDescription.textContent = `${jobInput.value}`;
+  closePopup();
+};
+
+saveButton.addEventListener('click', formSubmitHandler);

@@ -1,4 +1,8 @@
 .profile__add {
+  background-image: url(../../../images/profile__add.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: unset;
   width: 150px;
   height: 50px;
   border: 2px solid #FFFFFF;
@@ -7,7 +11,11 @@
   padding: 0;
   box-sizing: border-box;
   cursor: pointer;
-  background-color: unset;
+  transition: opacity 0.3s;
+}
+
+.profile__add:hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width:735px) {
