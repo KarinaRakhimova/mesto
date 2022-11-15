@@ -2,19 +2,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0 25px;
+  padding: 40px 0 25px;
   box-sizing: border-box;
 }
 
 @media screen and (max-width: 976px) {
   .profile {
-    padding: 20px 30px 25px;
+    padding: 40px 30px 25px;
   }
 }
 
 @media screen and (max-width: 650px) {
   .profile {
-  padding: 20px 19px 18px;
+  padding: 40px 19px 18px;
   }
 }
 

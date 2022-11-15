@@ -1,0 +1,23 @@
+[33mcommit d7fce6b30025291fe3996aaaa0f5044d48ad8719[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: KarinaR <rahimova@list.ru>
+Date:   Sun Nov 13 01:14:03 2022 +0500
+
+    fixed element__like
+
+[33mcommit 34f365130c5bbf198cd179f2737bac1a3eaf5b53[m
+Author: KarinaR <rahimova@list.ru>
+Date:   Sun Nov 13 01:05:11 2022 +0500
+
+    readme commit
+
+[33mcommit 26ff8eb0d3ef00751bef814aceba5047448eaa33[m
+Author: KarinaR <rahimova@list.ru>
+Date:   Sun Nov 13 00:43:58 2022 +0500
+
+    fixed bugs
+
+[33mcommit 6dbd7267ccf89e37f44a7592f7defba0094268d6[m
+Author: KarinaR <44320852+KarinaRakhimova@users.noreply.github.com>
+Date:   Sun Nov 6 17:21:08 2022 +0500
+
+    Initial commit
