@@ -20,67 +20,29 @@
         <p class="profile__description">Исследователь океана</p>
         <button class="profile__edit" aria-label="изменить" type="button"></button>
       </article>
-      <button class="profile__add" aria-label="добавить" type="submit"></button>
+      <button class="add-element" aria-label="добавить" type="submit"></button>
     </section>
     <section class="elements">
       <ul class="elements__list">
-        <li class="element">
-          <img class="element__image" src="./images/element_hongkong.jpg" alt="гонконг">
-          <div class="element__description">
-            <h2 class="element__city">Гонконг</h2>
-            <button class="element__like" aria-label="лайк" type="button"></button>
-          </div>
-          <button class="element__delete" aria-label="удалить" type="button"></button>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/element_tokyo.jpg" alt="токио">
-          <div class="element__description">
-            <h2 class="element__city">Токио</h2>
-            <button class="element__like" aria-label="лайк" type="button"></button>
-          </div>
-          <button class="element__delete" aria-label="удалить" type="button"></button>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/element_pekin.jpg" alt="пекин">
-          <div class="element__description">
-            <h2 class="element__city">Пекин</h2>
-            <button class="element__like" aria-label="лайк" type="button"></button>
-          </div>
-          <button class="element__delete" aria-label="удалить" type="button"></button>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/element_dallas.jpg" alt="даллас">
-          <div class="element__description">
-            <h2 class="element__city">Даллас</h2>
-            <button class="element__like" aria-label="лайк" type="button"></button>
-          </div>
-          <button class="element__delete" aria-label="удалить" type="button"></button>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/element_newyork.jpg" alt="нью-йорк">
-          <div class="element__description">
-            <h2 class="element__city">Нью-Йорк</h2>
-            <button class="element__like" aria-label="лайк" type="button"></button>
-          </div>
-          <button class="element__delete" aria-label="удалить" type="button"></button>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/element_leipzig.jpg" alt="лейпциг">
-          <div class="element__description">
-            <h2 class="element__city">Лейпциг</h2>
-            <button class="element__like" aria-label="лайк" type="button"></button>
-          </div>
-          <button class="element__delete" aria-label="удалить" type="button"></button>
-        </li>
+
       </ul>
     </section>
+    <template class="element-template">
+      <li class="element">
+        <img class="element__image" src="" alt="">
+        <div class="element__description">
+          <h2 class="element__heading"></h2>
+          <button class="element__like" aria-label="лайк" type="button"></button>
+        </div>
+        <button class="element__delete" aria-label="удалить" type="button"></button>
+    </template>
   </main>
   <footer class="footer">
     <p class="footer__copyright ">© 2022 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div class="popup popup_type_profile">
     <div class="popup__container">
-      <form class="popup__form" name="profile form">
+      <form class="popup__form" name="profile-form">
         <h3 class="popup__title">Редактировать профиль</h3>
         <input type="text" placeholder="Имя" class="popup__input popup__input_type_name" name="name">
         <input type="text" placeholder="О себе" class="popup__input popup__input_type_description" name="job">
@@ -89,16 +51,23 @@
       <button class="popup__close" aria-label="закрыть" type="button"></button>
     </div>
   </div>
-  <div class="popup">
+  <div class="popup popup_type_element">
     <div class="popup__container">
-      <form class="popup__form" name="item form">
+      <form class="popup__form" name="element-form">
         <h3 class="popup__title">Новое место</h3>
-        <input type="text" placeholder="Имя" class="popup__input popup__input_type_place-name" name="name">
-        <input type="text" placeholder="О себе" class="popup__input popup__input_type_place-link" name="job">
+        <input type="text" placeholder="Название" class="popup__input popup__input_type_element-name" name="element-name">
+        <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_element-link" name="element-link">
       </form>
-      <button class="popup__save" type="submit">Сохранить</button>
+      <button class="popup__save" type="submit">Создать</button>
       <button class="popup__close" aria-label="закрыть" type="button"></button>
     </div>
+  </div>
+  <div class="popup popup_type_element-image">
+    <figure class="popup__image-container">
+      <img class="popup__image" src="" alt="">
+      <figcaption class="popup__caption"></figcaption>
+      <button class="popup__close" aria-label="закрыть" type="button"></button>
+    </figure>
   </div>
   <script src="./scripts/index.js"></script>
 </body>

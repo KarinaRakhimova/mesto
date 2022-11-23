@@ -1,4 +1,4 @@
-.profile__add {
+.add-element {
   background-image: url(../../../images/profile__add.svg);
   background-repeat: no-repeat;
   background-position: center;
@@ -14,12 +14,12 @@
   transition: opacity 0.3s;
 }
 
-.profile__add:hover {
+.add-element:hover {
   opacity: 0.6;
 }
 
 @media screen and (max-width:735px) {
-  .profile__add {
+  .add-element {
     width: 100%;
     background-size: 16px 16px;
   }
