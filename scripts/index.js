@@ -30,113 +30,102 @@ const profilePopup = document.querySelector('.popup_type_profile');
 const elementPopup = document.querySelector('.popup_type_element');
 const imagePopup = document.querySelector('.popup_type_element-image');
 
-//Редактирование профиля//
-const profileForm = profilePopup.querySelector('.popup__form');
-const nameInput = profileForm.querySelector('.popup__input_type_name');
-const jobInput = profileForm.querySelector('.popup__input_type_description');
-
+//редактирование профиля//
 const editProfileButton = document.querySelector('.profile__edit');
 const closeProfileButton = profilePopup.querySelector('.popup__close');
 const saveProfileButton = profilePopup.querySelector('.popup__save');
 
+const profileForm = profilePopup.querySelector('.popup__form');
+const nameInput = profilePopup.querySelector('.popup__input_type_name');
+const jobInput = profilePopup.querySelector('.popup__input_type_description');
+
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
-function editProfile() {
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+};
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+};
+
+editProfileButton.addEventListener('click', function () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
-  profilePopup.classList.add('popup_opened');
-};
+  openPopup(profilePopup);
+});
 
-editProfileButton.addEventListener('click', editProfile);
-
-function closeProfile() {
-  profilePopup.classList.remove('popup_opened');
-};
-
-closeProfileButton.addEventListener('click', closeProfile);
+closeProfileButton.addEventListener('click', () => closePopup(profilePopup));
 
 function saveProfileChanges(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
-  closeProfile();
-};
+  closePopup(profilePopup);
+}
+
 saveProfileButton.addEventListener('click', saveProfileChanges);
 
-//создание разметки карточки//
+//добавление карточки//
 const elementTemplate = document.querySelector('.element-template').content;
 const elementsList = document.querySelector('.elements__list');
 
-function addElementHTML(card) {
-  const elementItem = elementTemplate.cloneNode(true);
-  elementItem.querySelector('.element__heading').textContent = card.name;
-  elementItem.querySelector('.element__image').alt = card.name;
-  elementItem.querySelector('.element__image').src = card.link;
-  elementItem.querySelector('.element__image').addEventListener('click', openImagePopup);
-  elementItem.querySelector('.element__like').addEventListener('click', likeClicked);
-  elementItem.querySelector('.element__delete').addEventListener('click', deleteClicked);
-
-  elementsList.prepend(elementItem);
-};
-
-function likeClicked(evt) {
-  evt.target.classList.toggle('element__like_active');
-};
-
-function deleteClicked(evt) {
-  evt.target.parentElement.remove();
-};
-
-initialCards.forEach(addElementHTML);
-
-//Добавление новой карточки//
-const elementForm = elementPopup.querySelector('.popup__form');
 const addElementButton = document.querySelector('.add-element');
 const closeElementButton = elementPopup.querySelector('.popup__close');
 const saveElementButton = elementPopup.querySelector('.popup__save');
 
+const elementForm = elementPopup.querySelector('.popup__form');
 const elementName = elementForm.querySelector('.popup__input_type_element-name');
 const elementLink = elementForm.querySelector('.popup__input_type_element-link');
 
-function addElement() {
+function addElementHTML(card) {
+  const elementItem = elementTemplate.querySelector('.element').cloneNode(true);
+  elementItem.querySelector('.element__image').src = card.link;
+  elementItem.querySelector('.element__image').alt = card.name;
+  elementItem.querySelector('.element__heading').textContent = card.name;
+  elementItem.querySelector('.element__like').addEventListener('click', likeClicked);
+  elementItem.querySelector('.element__delete').addEventListener('click', deleteClicked);
+  elementItem.querySelector('.element__image').addEventListener('click', openImagePopup);
+  elementsList.prepend(elementItem);
+}
+
+function likeClicked(evt) {
+  evt.target.classList.toggle('element__like_active');
+}
+
+function deleteClicked(evt) {
+  evt.target.parentElement.remove();
+}
+
+initialCards.forEach(addElementHTML);
+
+addElementButton.addEventListener('click', function () {
   elementName.value = "";
   elementLink.value = "";
-  elementPopup.classList.add('popup_opened');
-};
+  openPopup(elementPopup);
+});
 
-addElementButton.addEventListener('click', addElement);
-
-function closeElement() {
-  elementPopup.classList.remove('popup_opened');
-};
-
-closeElementButton.addEventListener('click', closeElement);
+closeElementButton.addEventListener('click', () => closePopup(elementPopup));
 
 function saveElementChanges(evt) {
   evt.preventDefault();
   elementForm.name = elementName.value;
   elementForm.link = elementLink.value;
   addElementHTML(elementForm);
-  closeElement();
+  closePopup(elementPopup);
 }
-
 saveElementButton.addEventListener('click', saveElementChanges);
 
-//Открытие картинки//
+//открытие картинки//
+const imageOpened = imagePopup.querySelector('.popup__image');
+const imageOpenedCaption = imagePopup.querySelector('.popup__caption');
 const closeImagePopupButton = imagePopup.querySelector('.popup__close');
-const image = imagePopup.querySelector('.popup__image');
-const caption = imagePopup.querySelector('.popup__caption');
-const elementHeading = document.querySelector('.element__heading');
 
 function openImagePopup(evt) {
-  image.src = evt.target.src;
-  caption.textContent = evt.target.alt;
-  imagePopup.classList.add('popup_opened');
+  imageOpened.src = evt.target.src;
+  imageOpenedCaption.textContent = evt.target.alt;
+  openPopup(imagePopup);
 }
 
-function closeImagePopup() {
-  imagePopup.classList.remove('popup_opened');
-}
-
-closeImagePopupButton.addEventListener('click', closeImagePopup);
+closeImagePopupButton.addEventListener('click', () => closePopup(imagePopup));

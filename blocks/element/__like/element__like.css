@@ -1,10 +1,12 @@
 .element__like {
   background-image: url(../../../images/element__like.svg);
   background-repeat: no-repeat;
-  min-width: 22px;
-  height: 19px;
+  background-size: 22px 19px;
+  min-width: 23px;
+  height: 20px;
   cursor: pointer;
   border: none;
+  padding: 0;
   background-color: unset;
   transition: opacity, 0.3s;
 }
