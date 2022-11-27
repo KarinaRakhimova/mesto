@@ -29,7 +29,7 @@
     </section>
     <template class="element-template">
       <li class="element">
-        <img class="element__image" src="url" alt="">
+        <img class="element__image" src="url" alt="изображение элемента списка">
         <div class="element__description">
           <h2 class="element__heading"></h2>
           <button class="element__like" aria-label="лайк" type="button"></button>
@@ -47,8 +47,8 @@
         <h3 class="popup__title">Редактировать профиль</h3>
         <input type="text" placeholder="Имя" class="popup__input popup__input_type_name" name="name">
         <input type="text" placeholder="О себе" class="popup__input popup__input_type_description" name="job">
+        <button class="popup__save" type="submit">Сохранить</button>
       </form>
-      <button class="popup__save" type="submit">Сохранить</button>
       <button class="popup__close" aria-label="закрыть" type="button"></button>
     </div>
   </div>
@@ -56,18 +56,17 @@
     <div class="popup__container">
       <form class="popup__form" name="element-form">
         <h3 class="popup__title">Новое место</h3>
-        <input type="text" placeholder="Название" class="popup__input popup__input_type_element-name"
-          name="element-name">
+        <input type="text" placeholder="Название" class="popup__input popup__input_type_element-name" name="element-name">
         <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_element-link"
           name="element-link">
+        <button class="popup__save" type="submit">Создать</button>
       </form>
-      <button class="popup__save" type="submit">Создать</button>
       <button class="popup__close" aria-label="закрыть" type="button"></button>
     </div>
   </div>
   <div class="popup popup_type_element-image">
     <figure class="popup__image-container">
-      <img class="popup__image" src="url" alt="">
+      <img class="popup__image" src="url" alt="полноразмерное изображение элемента списка">
       <figcaption class="popup__caption"></figcaption>
       <button class="popup__close" aria-label="закрыть" type="button"></button>
     </figure>
