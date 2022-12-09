@@ -31,7 +31,11 @@ const elementPopup = document.querySelector('.popup_type_element');
 const imagePopup = document.querySelector('.popup_type_element-image');
 
 // открытие/закрытие попапов//
-const closeByOverlayClick = (evt) => closePopup(evt.target);
+const closeByOverlayClick = (evt) => {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target)
+  };
+}
 
 const closeByEsc = (evt) => {
   if (evt.key === "Escape") {
