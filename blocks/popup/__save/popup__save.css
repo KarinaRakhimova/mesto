@@ -9,6 +9,8 @@
   border: none;
   cursor: pointer;
   transition: opacity 0.3s;
+  margin-top: 18px;
+  padding: 0;
 }
 
 .popup__save:hover {

@@ -43,10 +43,12 @@
   </footer>
   <div class="popup popup_type_profile">
     <div class="popup__container">
-      <form class="popup__form" name="profile-form">
+      <form class="popup__form" name="profile-form" novalidate>
         <h3 class="popup__title">Редактировать профиль</h3>
-        <input type="text" placeholder="Имя" class="popup__input popup__input_type_name" name="name">
-        <input type="text" placeholder="О себе" class="popup__input popup__input_type_description" name="job">
+        <input type="text" placeholder="Имя" class="popup__input popup__input_type_name" name="name" id="profile-name" required minlength="2" maxlength="40">
+        <span class="popup__input-error profile-name-error"></span>
+        <input type="text" placeholder="О себе" class="popup__input popup__input_type_description" name="job" id="job-description" required minlength="2" maxlength="200">
+        <span class="popup__input-error job-description-error"></span>
         <button class="popup__save" type="submit">Сохранить</button>
       </form>
       <button class="popup__close" aria-label="закрыть" type="button"></button>
@@ -54,11 +56,13 @@
   </div>
   <div class="popup popup_type_element">
     <div class="popup__container">
-      <form class="popup__form" name="element-form">
+      <form class="popup__form" name="element-form" novalidate>
         <h3 class="popup__title">Новое место</h3>
-        <input type="text" placeholder="Название" class="popup__input popup__input_type_element-name" name="element-name">
-        <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_element-link"
-          name="element-link">
+        <input type="text" placeholder="Название" class="popup__input popup__input_type_element-name" name="element-name" id="element-name" required minlength="1" maxlength="30">
+        <span class="popup__input-error element-name-error"></span>
+        <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_type_element-link"
+          name="element-link" id="element-link" required>
+        <span class="popup__input-error element-link-error"></span>
         <button class="popup__save" type="submit">Создать</button>
       </form>
       <button class="popup__close" aria-label="закрыть" type="button"></button>
@@ -66,12 +70,13 @@
   </div>
   <div class="popup popup_type_element-image">
     <figure class="popup__image-container">
-      <img class="popup__image" src="url" alt="полноразмерное изображение элемента списка">
+      <img class="popup__image" src="" alt="полноразмерное изображение элемента списка">
       <figcaption class="popup__caption"></figcaption>
       <button class="popup__close" aria-label="закрыть" type="button"></button>
     </figure>
   </div>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>
