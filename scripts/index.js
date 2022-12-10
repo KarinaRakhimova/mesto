@@ -35,7 +35,7 @@ const handleCloseByOverlayClick = (evt) => {
   if (evt.target === evt.currentTarget) {
     closePopup(evt.target)
   };
-}
+};
 
 const handleCloseByEsc = (evt) => {
   if (evt.key === "Escape") {
@@ -89,14 +89,15 @@ function deleteElement(evt) {
   evt.target.closest('.element').remove();
 };
 
+import { disableButton } from "./validate.js";
+
 function handleElementChanges(evt) {
   evt.preventDefault();
   elementForm.name = elementName.value;
   elementForm.link = elementLink.value;
   addElement(elementForm, elementsContainer);
   evt.target.reset();
-  elementSaveButton.setAttribute("disabled", "disabled");
-  elementSaveButton.classList.add('popup__save_disabled');
+  disableButton(elementSaveButton);
   closePopup(elementPopup);
 };
 
@@ -119,9 +120,13 @@ closeButtons.forEach((button) => {
 
 profileForm.addEventListener('submit', handleProfileChanges);
 
+import { hideError } from "./validate.js";
+
 profileEditButton.addEventListener('click', function () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
+  const inputs = [...profileForm.querySelectorAll('.popup__input')];
+  inputs.forEach((input) => { hideError(profileForm, input)});
   openPopup(profilePopup);
 });
 
