@@ -34,5 +34,4 @@ const validationObjects = {
   errorClass: 'popup__input-error_visible'
 };
 
-
 export { initialCards, validationObjects };

@@ -1,6 +1,6 @@
-import { Card } from './cards.js'
+import { Card } from './Card.js'
 import { FormValidator } from './formValidator.js'
-import { initialCards, validationObjects } from './const.js';
+import { initialCards, validationObjects } from './const.js'
 
 //объявление попапов//
 const profilePopup = document.querySelector('.popup_type_profile');
@@ -67,7 +67,7 @@ profileEditButton.addEventListener('click', function () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
   const inputs = [...profileForm.querySelectorAll('.popup__input')];
-  inputs.forEach((input) => { profileFormValidator._hideError(input) })
+  inputs.forEach((input) => profileFormValidator.hideError(input));
   openPopup(profilePopup);
 });
 
@@ -90,15 +90,14 @@ function handleElementChanges(evt) {
   evt.preventDefault();
   addCard({ name: elementName.value, link: elementLink.value }, '.element-template', elementsContainer)
   evt.target.reset();
-  const inputs = [...elementForm.querySelectorAll('.popup__input')];
-  elementFormValidator._toggleButtonState(inputs, elementSaveButton)
+  elementFormValidator.toggleButtonState()
   closePopup(elementPopup);
 };
 
 elementForm.addEventListener('submit', handleElementChanges);
 
 function addCard(card, selector, container) {
-  const newCard = new Card(card, selector)
+  const newCard = new Card(card, selector, openPopup)
   const cardItem = newCard.render();
   container.prepend(cardItem)
 }

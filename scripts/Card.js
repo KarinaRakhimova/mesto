@@ -1,4 +1,4 @@
-import { openPopup } from "./index.js"
+import {imagePopup, imageElement, imageCaption} from './utils.js'
 
 export class Card {
 
@@ -8,17 +8,14 @@ export class Card {
     likeActive: 'element__like_active',
     image: '.element__image',
     heading:'.element__heading',
-    imagePopup: '.popup_type_element-image',
-    imagePopupOpened: 'popup_opened',
-    imageOpened: '.popup__image',
-    imageCaption: '.popup__caption'
   }
 
-  constructor (card, selector) {
+  constructor (card, selector, openPopupFn) {
     this._name = card.name;
     this._link = card.link;
     this._selector = selector;
     this._cardElement = document.querySelector(this._selector).content.children[0].cloneNode(true);
+    this._openPopup = openPopupFn;
   }
 
   _toggleLike(evt) {
@@ -26,28 +23,22 @@ export class Card {
   }
 
   _deleteElement() {
-    this._cardElement.remove()
+    this._cardElement.remove();
+    //подскажи пожалуйста, что имеется в виду под "зануллить"? это про оператор delete или нет?
+    //delete this._cardElement;
+
   }
-
-  // второй вариант удаления элемента, какой предпочтительнее?
-  //_removeCard(evt) {
-  //   evt.target.closest('.element').remove();
-  // }
-
 
   _handleImagePopup() {
-    const imagePopup = document.querySelector(Card.selectors.imagePopup);
-    imagePopup.querySelector(Card.selectors.imageOpened).src = this._link;
-    imagePopup.querySelector(Card.selectors.imageCaption).textContent = this._name;
-    openPopup(imagePopup)
+    imageElement.src = this._link;
+    imageCaption.textContent = this._name;
+    this._openPopup(imagePopup);
   }
-
 
   _setListeners() {
     this._cardElement.querySelector(Card.selectors.like).addEventListener('click', (evt) => this._toggleLike(evt));
     this._cardElement.querySelector(Card.selectors.delete).addEventListener('click', () => this._deleteElement());
     this._cardElement.querySelector(Card.selectors.image).addEventListener('click', () => this._handleImagePopup())
-    // this._cardElement.querySelector(Card.selectors.delete).addEventListener('click', (evt) => this._removeCard(evt));
   }
 
   render() {
