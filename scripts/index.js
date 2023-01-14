@@ -1,112 +1,65 @@
-import { Card } from './Card.js'
-import { FormValidator } from './formValidator.js'
+import Card from './Card.js';
+import Section from './Section.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
+import FormValidator from './formValidator.js'
 import { initialCards, validationObjects } from './const.js'
+import { profileEditButton, profileForm, elementForm, elementAddButton } from './utils.js'
 
-//объявление попапов//
-const profilePopup = document.querySelector('.popup_type_profile');
-const elementPopup = document.querySelector('.popup_type_element');
-
-const popups = [...document.querySelectorAll('.popup')];
-const closeButtons = document.querySelectorAll('.popup__close');
-
-const profileEditButton = document.querySelector('.profile__edit');
-
-const profileForm = document.forms['profile-form'];
-const nameInput = profilePopup.querySelector('.popup__input_type_name');
-const jobInput = profilePopup.querySelector('.popup__input_type_description');
-
-const profileName = document.querySelector('.profile__name');
-const profileDescription = document.querySelector('.profile__description');
-
-const elementsContainer = document.querySelector('.elements__list');
-
-const elementAddButton = document.querySelector('.add-element');
-const elementSaveButton = elementPopup.querySelector('.popup__save');
-
-const elementForm = document.forms['element-form'];
-const elementName = elementForm.querySelector('.popup__input_type_element-name');
-const elementLink = elementForm.querySelector('.popup__input_type_element-link');
-
-// открытие/закрытие попапов//
-
-const handleCloseByOverlayClick = (evt) => {
-  if (evt.target === evt.currentTarget) {
-    closePopup(evt.target)
-  };
-};
-
-const handleCloseByEsc = (evt) => {
-  if (evt.key === "Escape") {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-};
-
-export function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', handleCloseByEsc);
-};
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleCloseByEsc);
-};
-
-popups.forEach((popup) => popup.addEventListener('mousedown', handleCloseByOverlayClick));
-
-closeButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-});
-
-//профиль
-
+//валидация форм
 const profileFormValidator = new FormValidator(validationObjects, profileForm);
 profileFormValidator.enableValidation();
-
-profileEditButton.addEventListener('click', function () {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileDescription.textContent;
-  const inputs = [...profileForm.querySelectorAll('.popup__input')];
-  inputs.forEach((input) => profileFormValidator.hideError(input));
-  openPopup(profilePopup);
-});
-
-function handleProfileChanges(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileDescription.textContent = jobInput.value;
-  closePopup(profilePopup);
-};
-
-profileForm.addEventListener('submit', handleProfileChanges);
-
-//добавление карточки
 const elementFormValidator = new FormValidator(validationObjects, elementForm);
 elementFormValidator.enableValidation();
 
-elementAddButton.addEventListener('click', () => openPopup(elementPopup));
+//карточки
+const elementPopup = new PopupWithForm('.popup_type_element', createCardItem);
 
-function handleElementChanges(evt) {
-  evt.preventDefault();
-  addCard({ name: elementName.value, link: elementLink.value }, '.element-template', elementsContainer)
-  evt.target.reset();
+elementAddButton.addEventListener('click', () => {
+  elementPopup.openPopup();
   elementFormValidator.toggleButtonState()
-  closePopup(elementPopup);
-};
+});
 
-elementForm.addEventListener('submit', handleElementChanges);
+//создание секции с карточками
+const elementsSection = new Section({
+  items: initialCards,
+  renderer: item => createCardItem(item)
+}, '.elements__list')
 
-function addCard(card, selector, container) {
-  const newCard = new Card(card, selector, openPopup)
-  const cardItem = newCard.render();
-  container.prepend(cardItem)
+elementsSection.renderItems();
+
+//функция создания карточки
+function createCardItem(cardInfo) {
+  const newCard = new Card(cardInfo, () => openPopupWithImage(cardInfo));
+  const newCardElement = newCard.render();
+  elementsSection.addItem(newCardElement)
 }
 
-initialCards.forEach((card) => addCard(card, '.element-template', elementsContainer))
+//функция открытия попапа с изображением
+function openPopupWithImage(card) {
+  const imageOpened = new PopupWithImage('.popup_type_element-image', card);
+  imageOpened.openPopup();
+}
 
-// const formList = [...document.forms];
-// function validateForm(settings, form) {
-//   const newFormValidator = new FormValidator(settings, form);
-//   newFormValidator.enableValidation();
-// }
-// formList.forEach((form) => validateForm(validationObjects, form))
+//профиль
+const profilePopup = new PopupWithForm('.popup_type_profile', handleProfileChanges);
+
+profileEditButton.addEventListener('click', () => {
+  profilePopup.openPopup();
+  const newUser = new UserInfo('.popup__input_type_name', '.popup__input_type_description');
+  newUser.getUserInfo();
+  const inputs = [...profileForm.querySelectorAll('.popup__input')];
+  inputs.forEach((input) => profileFormValidator.hideError(input));
+});
+
+function handleProfileChanges(someInfo) {
+  const newUser = new UserInfo('.popup__input_type_name', '.popup__input_type_description');
+  newUser.setUserInfo(someInfo);
+ }
+
+
+
+
+
+
