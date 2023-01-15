@@ -1,11 +1,12 @@
-import Card from './Card.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
-import FormValidator from './formValidator.js'
-import { initialCards, validationObjects } from './const.js'
-import { profileEditButton, profileForm, elementForm, elementAddButton } from './utils.js'
+import './pages/index.css';
+import Card from './scripts/Card.js';
+import Section from './scripts/Section.js';
+import PopupWithImage from './scripts/PopupWithImage.js';
+import PopupWithForm from './scripts/PopupWithForm.js';
+import UserInfo from './scripts/UserInfo.js';
+import FormValidator from './scripts/formValidator.js'
+import { initialCards, validationObjects } from './scripts/const.js'
+import { profileEditButton, profileForm, elementForm, elementAddButton } from './scripts/utils.js'
 
 //валидация форм
 const profileFormValidator = new FormValidator(validationObjects, profileForm);
