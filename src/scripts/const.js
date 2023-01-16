@@ -34,4 +34,12 @@ const validationObjects = {
   errorClass: 'popup__input-error_visible'
 };
 
-export { initialCards, validationObjects };
+const cardSelectors = {
+  like: '.element__like',
+  delete: '.element__delete',
+  likeActive: 'element__like_active',
+  image: '.element__image',
+  heading:'.element__heading',
+  template: '.element-template',
+}
+export { initialCards, validationObjects, cardSelectors };
