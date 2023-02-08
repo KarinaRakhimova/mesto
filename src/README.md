@@ -18,7 +18,7 @@
 - валидация форм;
 
 **Ссылка на GitHub**
-https://karinarakhimova.github.io/mesto/index.html
+https://karinarakhimova.github.io/mesto/
 
 **Планы по доработке**
 На данный момент доработка не планируется.

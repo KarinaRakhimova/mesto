@@ -14,9 +14,9 @@
   <main class="content">
     <section class="profile">
       <article class="profile__info">
-        <img class="profile__avatar" src="<%=require('./images/avatar_cousteau.svg')%>" alt="аватар профиля">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <p class="profile__description">Исследователь океана</p>
+        <img class="profile__avatar" src="" alt="аватар профиля">
+        <h1 class="profile__name"></h1>
+        <p class="profile__description"></p>
         <button class="profile__edit" aria-label="изменить" type="button"></button>
       </article>
       <button class="add-element" aria-label="добавить" type="submit"></button>
@@ -31,7 +31,10 @@
         <img class="element__image" src="url" alt="изображение элемента списка">
         <div class="element__description">
           <h2 class="element__heading"></h2>
-          <button class="element__like" aria-label="лайк" type="button"></button>
+          <div class="element__like">
+            <button class="element__like-button" aria-label="лайк" type="button"></button>
+            <p class="element__like-counter"></p></div>
+          </div>
         </div>
         <button class="element__delete" aria-label="удалить" type="button"></button>
       </li>
@@ -46,8 +49,20 @@
         <h3 class="popup__title">Редактировать профиль</h3>
         <input type="text" placeholder="Имя" class="popup__input popup__input_type_name" name="name" id="profile-name" required minlength="2" maxlength="40">
         <span class="popup__input-error profile-name-error"></span>
-        <input type="text" placeholder="О себе" class="popup__input popup__input_type_description" name="job" id="job-description" required minlength="2" maxlength="200">
+        <input type="text" placeholder="О себе" class="popup__input popup__input_type_description" name="about" id="job-description" required minlength="2" maxlength="200">
         <span class="popup__input-error job-description-error"></span>
+        <button class="popup__save" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close" aria-label="закрыть" type="button"></button>
+    </div>
+  </div>
+  <div class="popup popup_type_avatar">
+    <div class="popup__container">
+      <form class="popup__form" name="avatar-form" novalidate>
+        <h3 class="popup__title">Обновить аватар</h3>
+        <input type="url" placeholder="Ссылка на аватар" class="popup__input popup__input_type_avatar-link"
+          name="avatar" id="avatar-link" required>
+        <span class="popup__input-error avatar-link-error"></span>
         <button class="popup__save" type="submit">Сохранить</button>
       </form>
       <button class="popup__close" aria-label="закрыть" type="button"></button>
@@ -65,6 +80,15 @@
         <button class="popup__save" type="submit">Создать</button>
       </form>
       <button class="popup__close" aria-label="закрыть" type="button"></button>
+    </div>
+  </div>
+  <div class="popup popup_type_confirm">
+    <div class="popup__confirm-container">
+      <form class="popup__form" name="confirm-form">
+        <h3 class="popup__confirm-title">Вы уверены?</h3>
+        <button class="popup__save" type="submit">Да</button>
+        <button class="popup__close" aria-label="закрыть" type="button"></button>
+      </form>
     </div>
   </div>
   <div class="popup popup_type_element-image">
