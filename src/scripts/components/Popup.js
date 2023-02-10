@@ -4,8 +4,6 @@ export default class Popup {
     this._popup = document.querySelector(popupSelector);
     this._closeButton = this._popup.querySelector('.popup__close');
     this._handleCloseByEsc = this._handleCloseByEsc.bind(this);
-    //возможно слушатели сразу устанавливать при создании экземпляра класса?
-    //this._listeners = this.setEventListeners();
   }
 
   open() {

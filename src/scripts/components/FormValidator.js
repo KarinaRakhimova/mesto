@@ -67,13 +67,14 @@ export default class FormValidator {
       })
   }
 
-  removeValidationErrors() {
+  resetValidation() {
     this._inputList.forEach(input=>this.hideError(input));
+    this.toggleButtonState();
   }
 
   enableValidation() {
     this._form.addEventListener('submit', (evt) => evt.preventDefault());
-      this._setInputListeners();
+    this._setInputListeners();
     }
   }
 

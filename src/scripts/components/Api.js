@@ -4,43 +4,39 @@ export default class Api {
     this._headers = headers;
   }
 
-  getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers
-    })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+  _checkResponse = res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+
+  _request(url, options) {
+    return fetch(url, options)
+    .then(this._checkResponse)
   }
 
   getInitialProfile() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers
-    })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+    return this._request(`${this._baseUrl}/users/me`, {headers: this._headers})
   }
 
-  editProfileInfo(someInfo) {
-    return fetch(`${this._baseUrl}/users/me`, {
+  getInitialCards() {
+    return this._request(`${this._baseUrl}/cards`, {headers: this._headers})
+  }
+
+  editProfileInfo({name, about}) {
+    return this._request(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({
-        name: someInfo.name,
-        about: someInfo.about
-      })
+      body: JSON.stringify({name, about})
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
   }
 
   editAvatar(avatarLink) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(avatarLink)
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
   }
 
   postNewCard(cardInfo) {
-    return fetch(`${this._baseUrl}/cards`,{
+    return this._request(`${this._baseUrl}/cards`,{
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -48,22 +44,19 @@ export default class Api {
         link: cardInfo.link
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return this._request(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
   }
 
   toggleLike(cardId, method) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: method,
       headers: this._headers,
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
   }
 }
