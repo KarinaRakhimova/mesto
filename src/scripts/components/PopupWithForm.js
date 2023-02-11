@@ -16,34 +16,20 @@ export default class PopupWithForm extends Popup {
     return this._formValues;
   }
 
-  _submit = (evt) => {
-    evt.preventDefault()
-    this._handleSubmit(this._getInputValues())
-  }
-
-    //подскажите пожалуйста, как это реализовать?
-    // Можно лучше
-    // Если будет интересно, можно сделать так,
-    // чтобы внутрь обработчика сабмита уходила цепочка
-    // промиса (then, finally), чтобы можно было универсально
-    // закрывать попапы в then, и возвращать текст кнопки сабмита в finally
-
-    // у меня при реализации ниже выдает ошибку 'Uncaught TypeError: Cannot
-    //read properties of undefined (reading 'then')
-
   // _submit = (evt) => {
   //   evt.preventDefault()
-  //   this.renderLoading(true)
   //   this._handleSubmit(this._getInputValues())
-  //     .then(() => this.close())
-  //     .finally(() => this.renderLoading(false))
   // }
 
-  // function handleSubmit (someInfo) {
-  //   api.editProfileInfo(someInfo)
-  //     .then(res => userInfo.setUserInfo(res))
-  //     .catch(err => console.log(`Ошибка ${err}`));
-  // }
+  _submit = (evt) => {
+    evt.preventDefault()
+    this.renderLoading(true)
+    this._handleSubmit(this._getInputValues())
+      .then(() => this.close())
+      .catch(err => console.log(`Ошибка ${err}`))
+      .finally(() => this.renderLoading(false))
+
+  }
 
   setEventListeners() {
     this._form.addEventListener('submit', this._submit)

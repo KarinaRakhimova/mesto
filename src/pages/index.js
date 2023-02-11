@@ -73,10 +73,10 @@ function renderCard(cardInfo) {
 }
 
 //функция добавления карточки на страницу
-function createCardItem(cardInfo) {
-  const cardItem = renderCard(cardInfo);
-  cardSection.addItem(cardItem);
-}
+// function createCardItem(cardItem) {
+//   //const cardItem = renderCard(cardInfo);
+//   cardSection.addItem(cardItem);
+// }
 
 //функция открытия попапа с изображением
 function openPopupWithImage(card) {
@@ -103,15 +103,19 @@ function deleteCardItem(cardToDelete) {
 function handleLike(evt, card) {
   const likedByMe = card._likes.find(like => like._id === userInfo._id)
   if (likedByMe) {
-    card.unlike(evt);
     api.toggleLike(card._id, 'DELETE')
-      .then(res => card.updateLikes(res))
+      .then(res => {
+        card.updateLikes(res)
+        card.unlike(evt)
+      })
       .catch(err => console.log(`Ошибка ${err}`))
   }
   else {
-    card.like(evt);
     api.toggleLike(card._id, 'PUT')
-      .then(res => card.updateLikes(res))
+      .then(res => {
+        card.updateLikes(res)
+        card.like(evt)
+      })
       .catch(err => console.log(`Ошибка ${err}`))
   }
 }
@@ -142,30 +146,28 @@ function insertInfo() {
 
 //функция сабмита формы с профилем
 function handleProfileChanges(someInfo) {
-  profilePopup.renderLoading(true)
-  api.editProfileInfo(someInfo)
-    .then(res => userInfo.setUserInfo(res))
-    .then(() => profilePopup.close())
-    .finally(() => profilePopup.renderLoading(false))
-    .catch(err => console.log(`Ошибка ${err}`));
+  return api.editProfileInfo(someInfo)
+    .then(res => {
+      userInfo.setUserInfo(res)
+      profilePopup.close()
+    })
 }
 
 //сабмит формы с карточкой
 function submitCard(cardInfo) {
-  elementPopup.renderLoading(true)
-  api.postNewCard(cardInfo)
-    .then(res => createCardItem(res))
-    .then(() => elementPopup.close())
-    .finally(() => elementPopup.renderLoading(false))
-    .catch(err => console.log(`Ошибка ${err}`))
+  return api.postNewCard(cardInfo)
+    .then(res => {
+      cardSection.addItem(res)
+//      createCardItem(res)
+      elementPopup.close()
+    })
 }
 
 //функция сабмита формы с аватаром
 function updateAvatar(avatarLink) {
-  avatarPopup.renderLoading(true)
-  api.editAvatar(avatarLink)
-    .then(res => userInfo._avatar.src = res.avatar)
-    .then(() => avatarPopup.close())
-    .finally(() => avatarPopup.renderLoading(false))
-    .catch(err => console.log(`Ошибка ${err}`))
+  return api.editAvatar(avatarLink)
+    .then(res => {
+      userInfo.setUserInfo(res)
+      avatarPopup.close()
+    })
 }
